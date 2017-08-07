@@ -5,6 +5,11 @@
 @stop
 
 @section('content')
+   <ul>
+   @foreach($errors->all() as $error)
+       <li> {{ $error }} </li>
+   @endforeach
+   </ul>
    <form action="{{ url('students/insert') }}" method="post">
        {{ csrf_field() }}
        <label for="">Student No: </label><br>
@@ -23,13 +28,13 @@
            @endforeach   
        </select><br>
        <label for="">Program: </label><br>
-       <select name="programs" id="programs">
+       <select name="programs" id="programs" disabled>
            
        </select><br>       
        <label for="">Year: </label><br>       
        <input class="entrytext" type="text" name="studYear" value=""><br>
        <br> 
-       <button type="submit">Submit</button>
-       <button type="reset">Clear</button>
+       <button class="btn btn-primary" type="submit">Submit</button>
+       <button class="btn btn-danger" type="reset">Clear</button>
    </form>
 @stop

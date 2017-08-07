@@ -13,7 +13,7 @@ class CreateScheduleTable extends Migration
     public function up()
     {
         Schema::create('schedules', function (Blueprint $table) {
-            $table->string('schedid')->primary();
+            $table->string('schedid',10)->primary();
             $table->integer('schedcdays')->unsigned();
             $table->time('schedstart');
             $table->time('schedstop');

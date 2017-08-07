@@ -46,6 +46,13 @@ class StudentController extends Controller
 
     public function saveStudent(Request $request){
 
+        $cleanInput = $this->validate($request,[
+              'studNo'=>'required|numeric',
+              'studFname'=>'required|alpha',
+              'studLname'=>'required|alpha',
+              'studYear'=>'required|numeric|max:1',
+        ]);
+
          $student = new Student;
 
          $student->studentid    = $request->studNo;
@@ -57,7 +64,6 @@ class StudentController extends Controller
          $student->scollegeid   = $request->colleges;
 
          $student->save();
-
          return redirect('/student/'.$request->studNo);
     }
 }
