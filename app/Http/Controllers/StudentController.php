@@ -46,22 +46,24 @@ class StudentController extends Controller
 
     public function saveStudent(Request $request){
 
-        $cleanInput = $this->validate($request,[
+        $this->validate($request,[
               'studNo'=>'required|numeric',
               'studFname'=>'required|alpha',
               'studLname'=>'required|alpha',
+              'colleges' => 'required',
+              'programs' => 'required',
               'studYear'=>'required|numeric|max:1',
         ]);
 
          $student = new Student;
 
-         $student->studentid    = $request->studNo;
-         $student->studentfname = $request->studFname;
-         $student->studentmname = $request->studMname;
-         $student->studentlname = $request->studLname;
-         $student->studentyear  = $request->studYear;
-         $student->sprogramid   = $request->programs;
-         $student->scollegeid   = $request->colleges;
+            $student->studentid    = $request->studNo;
+            $student->studentfname = $request->studFname;
+            $student->studentmname = $request->studMname;
+            $student->studentlname = $request->studLname;
+            $student->studentyear  = $request->studYear;
+            $student->sprogramid   = $request->programs;
+            $student->scollegeid   = $request->colleges;
 
          $student->save();
          return redirect('/student/'.$request->studNo);

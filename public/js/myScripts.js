@@ -3,6 +3,7 @@ $(function(){
     $("#studentNo").on("blur",function(){
             var verification = $('input[name=_token]').val();
             var searchCriteria = $('#studentNo').val();
+            var inputState;
 
             if(this.value === '')
                this.focus();
@@ -11,20 +12,24 @@ $(function(){
                 url: '/students/check',
                 type: 'POST',
                 dataType: 'json', 
+                async: false,   //to be deprecated
                 data: {search: searchCriteria, _token: verification},
                 success: function(result){
-                        console.log(result.result);
+                        //console.log(result.result);
                         if(result.result)
-                            return true;
+                            inputState = true;
                         else {
-                            $('#studentNo').focus();
-                            return false;
+                        //     //$('#studentNo').focus();
+                            inputState = false;
                         }    
-                },
+                        // getResult(result.result);
+                }
             });
-
+           console.log(inputState); 
+           if(!inputState) 
+              this.focus();
     });
-
+    
 
     $('#colleges').on("focus change",function(){
             var verification = $('input[name=_token]').val();
